@@ -3,6 +3,23 @@ Self-Driving Car Engineer Nanodegree Program
 
 ---
 
+This is a project for Udacity MPC.
+
+## The Model
+
+We use the kinematickinematic model for the vehicle in this project.
+The states for the model are: `[x,y,psi,v]` which stand for the position in x and y, the yaw angle, and the speed.
+The actuators are `[delta,a]` which stand for the steering angle and the acceleration.
+
+## Parameters
+
+This project uses `N=15` and `dt=0.05`. The weights for the costs are: 1, 10, 1 for the reference states and  10, 1, for the actuators and 600, 1 for sequential actuation. The target speed is set for 60mph.
+
+## Latency
+
+There is a 100ms delay in the code to simulate the latency of the actuations. In order to account the latency, we use the solution from the solver at a t=0.1s delay. A better way is to transform the vehicle location using the motion model.
+
+
 ## Dependencies
 
 * cmake >= 3.5

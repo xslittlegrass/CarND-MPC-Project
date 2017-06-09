@@ -9,11 +9,22 @@ This is a project for Udacity MPC.
 
 We use the kinematickinematic model for the vehicle in this project.
 The states for the model are: `[x,y,psi,v]` which stand for the position in x and y, the yaw angle, and the speed.
-The actuators are `[delta,a]` which stand for the steering angle and the acceleration.
+The actuators are `[delta,a]` which stand for the steering angle and the acceleration. The state update equations are
+
+<img src="./img/state_update.png" width = 200>
+
+and the error equations are
+
+<img src="./img/error_cte.png" width = 200>
+<img src="./img/error_psi.png" width = 200>
 
 ## Parameters
 
-This project uses `N=15` and `dt=0.05`. The weights for the costs are: 1, 10, 1 for the reference states and  10, 1, for the actuators and 600, 1 for sequential actuation. The target speed is set for 60mph.
+This project uses `N=15` and `dt=0.05`. The weights for the costs are: 1, 10, 1 for the reference states and  10, 1, for the actuators and 600, 1 for sequential actuation. We use a large weight on the cost relates to the change of delta to ensure a smooth change of steering angle. We use `dt=0.05` so that a the delay of 100ms can be incorporate easily. `N0=15` is to ensure that the trajectory extend long enough into the future but not to long to cost a numerical instability. The target speed is set for 60mph. The parameters tried before are all be 1 expect the change of delta to be 500, which also works.
+
+## Way points
+
+The way points are used to fit to a third order polynomial. The fitting process is in the car coordinates, so that the way points are transformed from the map coordinates to the car coordinates. One thing to notice is that the map coordinates are left-handed while the car coordinates are right-handed so the y values from in the map coordinates are reversed before the coordinate transformation.
 
 ## Latency
 
